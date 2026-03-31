@@ -1,0 +1,27 @@
+*.log
+*.pot
+*.рус
+pycache
+*.bak
+*.py[cod]
+*$py.class
+pip-log.txt
+pip-delete-this-directory.txt
+.ipynb checkpoints
+python-version
+celerybeat-schedule.*
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.mypy_cache/
+**/migrations
+*.DS Store
+**/_pycache
+**/.DS Store
+.history
+ass
