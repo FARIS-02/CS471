@@ -1,0 +1,89 @@
+{% extends 'bookmodule/base.html' %}
+
+{% block content %}
+    <h2 style="text-align: center;">Table 1: Digital Games Price List</h2>
+    
+    <table border="1" style="width: 60%; margin: 20px auto; border-collapse: collapse; text-align: center;">
+        <thead>
+            <tr style="background-color: #f2f2f2;">
+                <th>Game Title</th>
+                <th>Platform</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Hollow Knight</td>
+                <td>PC / Console</td>
+                <td>$15.00</td>
+            </tr>
+            <tr>
+                <td>Baldur's Gate 3</td>
+                <td>PC / Console</td>
+                <td>$60.00</td>
+            </tr>
+            <tr>
+                <td>Yakuza 0</td>
+                <td>PC / Console</td>
+                <td>$20.00</td>
+            </tr>
+            <tr>
+                <td>Valheim</td>
+                <td>PC / Console</td>
+                <td>$19.99</td>
+            </tr>
+            <tr style="font-weight: bold; background-color: #e9ecef;">
+                <td colspan="2">Total Collection Value</td>
+                <td>$114.99</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br><hr><br>
+
+    <h2 style="text-align: center;">Table 2: Game Requirements Comparison</h2>
+    
+    <table border="1" style="width: 90%; margin: 20px auto; border-collapse: collapse;">
+        <caption style="padding: 10px; font-style: italic; font-weight: bold;">
+            Technical Specifications<br>Updated as of 2026
+        </caption>
+        <thead>
+            <tr style="background-color: #f2f2f2;">
+                <th>Game Name</th>
+                <th>Min RAM</th>
+                <th>Storage</th>
+                <th>Graphic Quality</th>
+                <th>Multiplayer?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Hollow Knight</td>
+                <td>4 GB</td>
+                <td>9 GB</td>
+                <td>2D Stylized</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>Baldur's Gate 3</td>
+                <td>8 GB</td>
+                <td>150 GB</td>
+                <td>Ultra Realistic</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>Yakuza 0</td>
+                <td>4 GB</td>
+                <td>50 GB</td>
+                <td>Realistic</td>
+                <td>No</td>
+            <tr>
+                <td>Valheim</td>
+                <td>8 GB</td>
+                <td>1 GB</td>
+                <td>Low-Poly 3D</td>
+                <td>Yes</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

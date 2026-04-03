@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show one Game</title>
+    <meta name="keywords" content="Games, recent, Learning, library">
+    <meta name="description" content="Games website">
+    <meta name="author" content="author name">
+    <link rel="icon" href="qu-icon.png">
+</head>
+<body>
+    <a href="{% url 'games.list_games' %}">Go Back</a>
+    <h1>Details of Game3</h1>
+    <h2>Yakuza 0</h2>
+    <h2>Developer: Ryu Ga Gotoku</h2>
+    <p><strong> Yakuza 0:</strong> A action-adventure game where you play as Kiryu and his friend Majima in the early days of the yakuza.</p>
+    <img src="{% static 'yakuza0.jpg' %}" alt="Yakuza 0" width="200" height="200">
+</body>
+</html>

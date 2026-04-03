@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}My Store{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+</head>
+<body>
+    <div class="topnav">
+        <a href="{% url 'games.index' %}">Home</a>
+        <a href="{% url 'games.list_games' %}">List Games</a>
+        <a href="{% url 'games.aboutus' %}">About Us</a>
+    </div>
+
+    <div style="padding: 20px;">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

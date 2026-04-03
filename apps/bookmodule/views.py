@@ -1,20 +1,42 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from urllib import request
 
+from django.shortcuts import render
+from apps.bookmodule.models import Game
 
 def index(request):
-    name = request.GET.get("name") or "world!"
-    return render(request, "bookmodule/index.html", {"name": name})
+    return render(request, "bookmodule/index.html")
 
-def index2(request, val1 = 0):
-    return HttpResponse("value1 = "+str(val1))
-def viewbook(request, bookId):
-    book1 = {'id': 123, 'title': 'Continuous Delivery', 'author': 'J. Humble and D. Farley'}
-    book2 = {'id': 456, 'title': 'Secrets of Reverse Engineering', 'author': 'E. Eilam'}
+def list_games(request):
+    return render(request, 'bookmodule/list_games.html')
+
+def aboutus(request):
+    return render(request, 'bookmodule/aboutus.html')
+
+def viewgame(request, gameId):
     
-    targetBook = None
-    if book1['id'] == bookId: targetBook = book1
-    if book2['id'] == bookId: targetBook = book2
+    game_id_str = str(gameId)
     
-    context = {'book': targetBook}
-    return render(request, 'bookmodule/show.html', context)
+    if game_id_str == "1":
+        return render(request, 'bookmodule/hollow_knight.html')
+    elif game_id_str == "2":
+        return render(request, 'bookmodule/baldurs_gate.html')
+    elif game_id_str == "3":
+        return render(request, 'bookmodule/yakuza0.html')
+    else:
+        return render(request, 'bookmodule/list_games.html')
+def list_games(request):
+    my_games = Game.objects.all()
+    return render(request, 'bookmodule/list_games.html', {'games': my_games})
+
+def lab5_query(request):
+    my_games = Game.objects.filter(price__gt=10).filter(title__icontains='Hollow')
+    return render(request, 'bookmodule/list_games.html', {'games': my_games})
+
+def links_view(request):
+    return render(request, 'bookmodule/links.html')
+
+def listing_view(request):
+    return render(request, 'bookmodule/listing.html')
+
+def tables_view(request):
+    return render(request, 'bookmodule/tables.html')

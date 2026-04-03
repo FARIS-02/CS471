@@ -1,0 +1,18 @@
+{% extends 'bookmodule/base.html' %}
+
+{% block title %}Games List{% endblock %}
+
+{% block content %}
+    <h1>Our Games Collection</h1>
+    <hr>
+    {% for game in games %}
+        <div style="margin-bottom: 20px; border-bottom: 1px solid #ccc;">
+            <h3>{{ game.title }}</h3>
+            <p>Developer: {{ game.developer }}</p>
+            <p>Price: ${{ game.price }}</p>
+            <a href="{% url 'games.view_one_game' game.id %}">View Details</a>
+        </div>
+    {% empty %}
+        <p>No games found in the database.</p>
+    {% endfor %}
+{% endblock %}

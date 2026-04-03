@@ -1,0 +1,34 @@
+
+h1 {
+    color: #2c3e50;
+    text-align: center; 
+    padding: 20px;
+}
+
+
+.my-link {
+    display: block; 
+    width: 300px;
+    margin: 10px auto;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #ecf0f1;
+    color: #333;
+    border: 1px solid #bdc3c7;
+}
+
+
+.my-link:visited {
+    color: #8e44ad; 
+}
+
+.my-link:hover {
+    background-color: yellow; 
+    color: red; 
+}
+
+.my-link:active {
+    background-color: blue; 
+    color: white;
+}
