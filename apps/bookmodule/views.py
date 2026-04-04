@@ -40,3 +40,6 @@ def listing_view(request):
 
 def tables_view(request):
     return render(request, 'bookmodule/tables.html')
+
+def formatting_view(request):
+    return render(request, 'bookmodule/formatting.html')

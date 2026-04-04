@@ -5,5 +5,5 @@ import apps.bookmodule.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('apps.bookmodule.urls')), 
+    path('books/', include('apps.bookmodule.urls')), 
 ]
