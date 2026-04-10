@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <title>{% block title %}My Store{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'main.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <div class="topnav">
         <a href="{% url 'games.index' %}">Home</a>
         <a href="{% url 'games.list_games' %}">List Games</a>
         <a href="{% url 'games.aboutus' %}">About Us</a>
+        <a href="{% url 'games.search' %}">Search</a>
     </div>
 
     <div style="padding: 20px;">

@@ -43,3 +43,39 @@ def tables_view(request):
 
 def formatting_view(request):
     return render(request, 'bookmodule/formatting.html')
+
+def getGamesList():
+    Game1 = {'id': 12344321, 'title': 'Continuous Delivery', 'developer': 'J.Humble and D. Farley'}
+    Game2 = {'id': 56788765, 'title': 'Reversing: Secrets of Reverse Engineering', 'developer': 'E. Eilam'}
+    Game3 = {'id': 43211234, 'title': 'The Hundred-Page Machine Learning Book', 'developer': 'Andriy Burkov'}
+    Game4 = {'id': 98765432, 'title': 'final fantasy', 'developer': 'square enix'}  
+    Game5 = {'id': 98765432, 'title': 'hollow knight', 'developer': 'team cherry'}  
+    Game6 = {'id': 98765432, 'title': 'baldurs gate 3', 'developer': 'loremasters'}
+    Game7 = {'id': 98765432, 'title': 'yakuza 0', 'developer': 'sega'}
+    Game8 = {'id': 98765432, 'title': 'persona 5', 'developer': 'atlus'}
+    Game9 = {'id': 98765432, 'title': 'zelda breath of the wild', 'developer': 'nintendo'}
+    Game10 = {'id': 98765432, 'title': 'mario odyssey', 'developer': 'nintendo'}
+
+    return [Game1, Game2, Game3, Game4, Game5, Game6, Game7, Game8, Game9, Game10]
+
+def search_view(request):
+    if request.method == "POST":
+        string = request.POST.get('keyword').lower()
+        isTitle = request.POST.get('option1')
+        isDeveloper = request.POST.get('option2')
+        
+        Games = getGamesList()
+        newgames = []
+        for item in Games:
+            contained = False
+            if isTitle and string in item['title'].lower(): contained = True
+            if not contained and isDeveloper and string in item['developer'].lower(): contained = True
+            
+            if contained: newgames.append(item)
+        return render(request, 'bookmodule/gamelist.html', {'games': newgames})
+    
+    return render(request, 'bookmodule/search.html')
+
+
+
+
