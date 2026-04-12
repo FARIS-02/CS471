@@ -77,5 +77,19 @@ def search_view(request):
     return render(request, 'bookmodule/search.html')
 
 
+def simple_query(request):
+    # نبحث عن الألعاب اللي اسمها يحتوي على حرف 'e'
+    mygames = Game.objects.filter(title__icontains='e') 
+    return render(request, 'bookmodule/list_games.html', {'games': mygames})
+
+def complex_query(request):
+    # نبحث عن لعبة لها مطور + اسمها فيه 'e' + سعرها أقل من أو يساوي 50
+    mygames = Game.objects.filter(developer__isnull=False).filter(title__icontains='e').exclude(price__gt=50)[:10]
+    
+    if len(mygames) >= 1:
+        return render(request, 'bookmodule/list_games.html', {'games': mygames})
+    else:
+        return render(request, 'bookmodule/index.html')
+
 
 

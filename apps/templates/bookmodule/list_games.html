@@ -1,18 +1,29 @@
 {% extends 'bookmodule/base.html' %}
-
-{% block title %}Games List{% endblock %}
-
 {% block content %}
-    <h1>Our Games Collection</h1>
-    <hr>
-    {% for game in games %}
-        <div style="margin-bottom: 20px; border-bottom: 1px solid #ccc;">
-            <h3>{{ game.title }}</h3>
-            <p>Developer: {{ game.developer }}</p>
-            <p>Price: ${{ game.price }}</p>
-            <a href="{% url 'games.view_one_game' game.id %}">View Details</a>
-        </div>
-    {% empty %}
-        <p>No games found in the database.</p>
-    {% endfor %}
+    <h2>🎮 Game Search Results:</h2>
+    
+    <table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%; text-align: left;">
+        <tr style="background-color: #f2f2f2;">
+            <th>ID</th>
+            <th>Game Title</th>
+            <th>Developer</th>
+            <th>Price</th>
+        </tr>
+        
+        {% for obj in games %}
+        <tr>
+            <td>{{ obj.id }}</td>
+            <td><strong>{{ obj.title }}</strong></td>
+            <td>{{ obj.developer }}</td>
+            <td>${{ obj.price }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4" style="text-align: center;">No games found matching your search.</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    <br>
+    <a href="/">Return to Home</a>
 {% endblock %}

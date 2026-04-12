@@ -12,4 +12,6 @@ urlpatterns = [
     path('html5/text/formatting/', views.formatting_view, name="games.formatting"),
     path('search', views.search_view, name="books.search"),
     path('search', views.search_view, name="games.search"),
+    path('simple/query', views.simple_query, name="games.simple_query"),
+    path('complex/query', views.complex_query, name="games.complex_query"),
 ]

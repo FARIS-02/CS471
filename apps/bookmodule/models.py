@@ -5,6 +5,3 @@ class Game(models.Model):
     developer = models.CharField(max_length=50) 
     price = models.FloatField(default=0.0)
     edition = models.SmallIntegerField(default=1)
-
-    def __str__(self):
-        return self.title
