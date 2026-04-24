@@ -1,0 +1,17 @@
+{% extends 'bookmodule/base.html' %}
+{% block content %}
+    <h2>🌍 Players per City:</h2>
+    <table border="1" cellpadding="10" style="border-collapse: collapse; text-align: left;">
+        <tr style="background-color: #f2f2f2;">
+            <th>City</th>
+            <th>Number of Players</th>
+        </tr>
+        {% for obj in cities %}
+        <tr>
+            <td>{{ obj.city }}</td>
+            <td>{{ obj.player_count }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br><a href="/">Return to Home</a>
+{% endblock %}

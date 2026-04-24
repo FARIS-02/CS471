@@ -14,4 +14,11 @@ urlpatterns = [
     path('search', views.search_view, name="games.search"),
     path('simple/query', views.simple_query, name="games.simple_query"),
     path('complex/query', views.complex_query, name="games.complex_query"),
+
+    path('lab8/task1', views.task1, name="games.task1"),
+    path('lab8/task2', views.task2, name="games.task2"),
+    path('lab8/task3', views.task3, name="games.task3"),
+    path('lab8/task4', views.task4, name="games.task4"),
+    path('lab8/task5', views.task5, name="games.task5"),
+    path('lab8/task7', views.task7, name="games.task7"),
 ]

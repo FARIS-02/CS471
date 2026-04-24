@@ -1,0 +1,12 @@
+{% extends 'bookmodule/base.html' %}
+{% block content %}
+    <h2>📊 Game Store Statistics:</h2>
+    <ul>
+        <li><strong>Total Games:</strong> {{ stats.total_games }}</li>
+        <li><strong>Total Value of Games:</strong> ${{ stats.total_price }}</li>
+        <li><strong>Average Price:</strong> ${{ stats.avg_price }}</li>
+        <li><strong>Most Expensive Game:</strong> ${{ stats.max_price }}</li>
+        <li><strong>Cheapest Game:</strong> ${{ stats.min_price }}</li>
+    </ul>
+    <br><a href="/">Return to Home</a>
+{% endblock %}

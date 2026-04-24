@@ -1,7 +1,9 @@
 from urllib import request
 
 from django.shortcuts import render
-from apps.bookmodule.models import Game
+from apps.bookmodule.models import Game 
+from .models import Game, Player, Address
+from django.db.models import Q, Count, Sum, Avg, Max, Min
 
 def index(request):
     return render(request, "bookmodule/index.html")
@@ -91,5 +93,33 @@ def complex_query(request):
     else:
         return render(request, 'bookmodule/index.html')
 
+def task1(request):
+    mygames = Game.objects.filter(Q(price__lte=80))
+    return render(request, 'bookmodule/list_games.html', {'games': mygames})
 
+def task2(request):
+    mygames = Game.objects.filter(Q(edition__gt=3) & (Q(title__icontains='qu') | Q(developer__icontains='qu')))
+    return render(request, 'bookmodule/list_games.html', {'games': mygames})
+
+def task3(request):
+    mygames = Game.objects.filter(~Q(edition__gt=3) & ~(Q(title__icontains='qu') | Q(developer__icontains='qu')))
+    return render(request, 'bookmodule/list_games.html', {'games': mygames})
+
+def task4(request):
+    mygames = Game.objects.all().order_by('title')
+    return render(request, 'bookmodule/list_games.html', {'games': mygames})
+
+def task5(request):
+    stats = Game.objects.aggregate(
+        total_games=Count('id'),
+        total_price=Sum('price'),
+        avg_price=Avg('price'),
+        max_price=Max('price'),
+        min_price=Min('price')
+    )
+    return render(request, 'bookmodule/task5.html', {'stats': stats})
+
+def task7(request):
+    cities = Address.objects.annotate(player_count=Count('player'))
+    return render(request, 'bookmodule/task7.html', {'cities': cities})
 
