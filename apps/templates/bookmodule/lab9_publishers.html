@@ -1,0 +1,33 @@
+{% extends 'bookmodule/base.html' %}
+{% block content %}
+    <h2>🏢 {{ task }}</h2>
+    <table border="1" cellpadding="10" style="border-collapse: collapse; text-align: left; width: 100%;">
+        <tr style="background-color: #e6f7ff;">
+            <th>Publisher Name</th>
+            <th>Result / Statistics</th>
+        </tr>
+        {% for pub in publishers %}
+        <tr>
+            <td><strong>{{ pub.name }}</strong> ({{ pub.location }})</td>
+            <td>
+                {% if pub.total_stock %}
+                    Total Games in Stock: {{ pub.total_stock }}
+                {% elif pub.oldest_game %}
+                    Oldest Game Released: {{ pub.oldest_game|date:"Y-m-d" }}
+                {% elif pub.avg_price %}
+                    Avg Price: ${{ pub.avg_price|floatformat:2 }} | Min: ${{ pub.min_price }} | Max: ${{ pub.max_price }}
+                {% elif pub.high_rated is not None %}
+                    Highly Rated Games (4+ Stars): {{ pub.high_rated }}
+                {% elif pub.filtered_count is not None %}
+                    Games Matching Filter: {{ pub.filtered_count }}
+                {% else %}
+                    No data or 0 results.
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="2">No publishers found.</td></tr>
+        {% endfor %}
+    </table>
+    <br><a href="/">Return to Home</a>
+{% endblock %}

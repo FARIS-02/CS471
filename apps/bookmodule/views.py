@@ -2,7 +2,7 @@ from urllib import request
 
 from django.shortcuts import render
 from apps.bookmodule.models import Game 
-from .models import Game, Player, Address
+from .models import Game, Player, Address, Publisher
 from django.db.models import Q, Count, Sum, Avg, Max, Min
 
 def index(request):
@@ -93,31 +93,44 @@ def complex_query(request):
     else:
         return render(request, 'bookmodule/index.html')
 
+# Task 1: نسبة توفر اللعبة من إجمالي المخزون
 def task1(request):
-    mygames = Game.objects.filter(Q(price__lte=80))
-    return render(request, 'bookmodule/list_games.html', {'games': mygames})
+    total_quantity = Game.objects.aggregate(total=Sum('quantity'))['total'] or 1
+    games = Game.objects.all()
+    for game in games:
+        # حقل مؤقت (Transient field) لحساب النسبة
+        game.percentage = round((game.quantity / total_quantity) * 100, 2)
+    return render(request, 'bookmodule/lab9_task1.html', {'games': games})
 
+# Task 2: عرض شركات النشر مع إجمالي عدد الألعاب التابعة لها
 def task2(request):
-    mygames = Game.objects.filter(Q(edition__gt=3) & (Q(title__icontains='qu') | Q(developer__icontains='qu')))
-    return render(request, 'bookmodule/list_games.html', {'games': mygames})
-
+    publishers = Publisher.objects.annotate(total_stock=Sum('game__quantity'))
+    return render(request, 'bookmodule/lab9_publishers.html', {'publishers': publishers, 'task': 'Task 2: Total Stock'})
+# Task 3: أقدم لعبة لكل شركة نشر
 def task3(request):
-    mygames = Game.objects.filter(~Q(edition__gt=3) & ~(Q(title__icontains='qu') | Q(developer__icontains='qu')))
-    return render(request, 'bookmodule/list_games.html', {'games': mygames})
-
+    publishers = Publisher.objects.annotate(oldest_game=Min('game__release_date'))
+    return render(request, 'bookmodule/lab9_publishers.html', {'publishers': publishers, 'task': 'Task 3: Oldest Game Date'})
+# Task 4: متوسط، أقل، وأعلى سعر ألعاب لكل شركة
 def task4(request):
-    mygames = Game.objects.all().order_by('title')
-    return render(request, 'bookmodule/list_games.html', {'games': mygames})
-
-def task5(request):
-    stats = Game.objects.aggregate(
-        total_games=Count('id'),
-        total_price=Sum('price'),
-        avg_price=Avg('price'),
-        max_price=Max('price'),
-        min_price=Min('price')
+    publishers = Publisher.objects.annotate(
+        avg_price=Avg('game__price'),
+        min_price=Min('game__price'),
+        max_price=Max('game__price')
     )
-    return render(request, 'bookmodule/task5.html', {'stats': stats})
+    return render(request, 'bookmodule/lab9_publishers.html', {'publishers': publishers, 'task': 'Task 4: Price Stats'})
+# Task 5: عدد الألعاب ذات التقييم العالي (أكبر من أو يساوي 4) لكل شركة
+def task5(request):
+    publishers = Publisher.objects.annotate(
+        high_rated=Count('game', filter=Q(game__rating__gte=4))
+    )
+    return render(request, 'bookmodule/lab9_publishers.html', {'publishers': publishers, 'task': 'Task 5: Highly Rated Games'})
+# Task 6: عدد الألعاب اللي سعرها فوق 50 والكمية بين 1 و 4
+def task6(request):
+    publishers = Publisher.objects.annotate(
+        filtered_count=Count('game', filter=Q(game__price__gt=50, game__quantity__gte=1, game__quantity__lt=5))
+    )
+    return render(request, 'bookmodule/lab9_publishers.html', {'publishers': publishers, 'task': 'Task 6: Filtered Game Count'})
+
 
 def task7(request):
     cities = Address.objects.annotate(player_count=Count('player'))

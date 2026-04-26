@@ -1,20 +1,28 @@
-{% extends 'bookmodule/base.html' %}
-{% block content %}
-    <h2>🎮 Game Search Results:</h2>
-    
-    <table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%; text-align: left;">
+<table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%; text-align: left;">
         <tr style="background-color: #f2f2f2;">
             <th>ID</th>
             <th>Game Title</th>
-            <th>Developer</th>
-            <th>Price</th>
+            <th>Publisher & Studios</th> <th>Price</th>
         </tr>
         
         {% for obj in games %}
         <tr>
             <td>{{ obj.id }}</td>
             <td><strong>{{ obj.title }}</strong></td>
-            <td>{{ obj.developer }}</td>
+            <td>
+                {% if obj.publisher %}
+                    <strong>{{ obj.publisher.name }}</strong>
+                {% else %}
+                    No Publisher
+                {% endif %}
+                
+                <br>
+                <small style="color: gray;">
+                {% for studio in obj.studios.all %}
+                    {{ studio.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+                </small>
+            </td>
             <td>${{ obj.price }}</td>
         </tr>
         {% empty %}
@@ -23,7 +31,3 @@
         </tr>
         {% endfor %}
     </table>
-    
-    <br>
-    <a href="/">Return to Home</a>
-{% endblock %}

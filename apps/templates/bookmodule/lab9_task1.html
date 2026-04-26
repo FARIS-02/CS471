@@ -1,0 +1,21 @@
+{% extends 'bookmodule/base.html' %}
+{% block content %}
+    <h2>📊 Task 1: Game Availability Percentage</h2>
+    <table border="1" cellpadding="10" style="border-collapse: collapse; text-align: left; width: 100%;">
+        <tr style="background-color: #f2f2f2;">
+            <th>Game Title</th>
+            <th>Quantity in Stock</th>
+            <th>Availability %</th>
+        </tr>
+        {% for game in games %}
+        <tr>
+            <td><strong>{{ game.title }}</strong></td>
+            <td>{{ game.quantity }}</td>
+            <td>{{ game.percentage }}%</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="3">No games found.</td></tr>
+        {% endfor %}
+    </table>
+    <br><a href="/">Return to Home</a>
+{% endblock %}
